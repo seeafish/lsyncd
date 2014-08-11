@@ -1,0 +1,2 @@
+---
+lsyncd_log_path: '/var/log/lsyncd'

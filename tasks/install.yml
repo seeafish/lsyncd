@@ -7,8 +7,11 @@
   apt: name=lsyncd update_cache=yes state=present
   when: ansible_os_family == "Debian"
 
+- name: Ensure log directory is present
+  file: path={{ lsyncd_log_path }} mode=0755 owner=root group=root state=directory
+
 - name: Configure lsyncd
   template: src=lsyncd.conf.j2 dest={{ lsyncd_conf_name }}
 
 - name: Enable and start service
-  service: name=lsyncd state=enabled state=started
+  service: name=lsyncd enabled=yes state=started
