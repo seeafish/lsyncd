@@ -1,0 +1,14 @@
+---
+- name: Install lsyncd
+  yum: name=lsyncd state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Install lsyncd
+  apt: name=lsyncd update_cache=yes state=present
+  when: ansible_os_family == "Debian"
+
+- name: Configure lsyncd
+  template: src=lsyncd.conf.j2 dest={{ lsyncd_conf_name }}
+
+- name: Enable and start service
+  service: name=lsyncd state=enabled state=started
