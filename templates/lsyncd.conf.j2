@@ -5,4 +5,15 @@
 --
 -- For more examples, see /usr/share/doc/lsyncd*/examples/
 --
-sync{default.rsyncssh, source="/var/www/html", host="localhost", targetdir="/tmp/htmlcopy/"}
+-- sync{default.rsyncssh, source="/var/www/html", host="localhost", targetdir="/tmp/htmlcopy/"}
+
+settings {
+    logfile = '/var/log/lsyncd/lsyncd.log',
+    statusFile = '/tmp/lsyncd.status'
+}
+
+sync {
+    default.rsync,
+    source = 'var/www/html',
+    target = '/tmp/test'
+}
