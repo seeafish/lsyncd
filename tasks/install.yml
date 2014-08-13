@@ -3,10 +3,6 @@
   yum: name=lsyncd state=present
   when: ansible_os_family == "RedHat"
 
-- name: Install lsyncd
-  apt: name=lsyncd update_cache=yes state=present
-  when: ansible_os_family == "Debian"
-
 - name: Ensure log directory is present
   file: path={{ lsyncd_log_path }} mode=0755 owner=root group=root state=directory
 
