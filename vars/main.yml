@@ -1,2 +1,9 @@
 ---
+lsyncd_watch_dir: '/var/www'
 lsyncd_log_path: '/var/log/lsyncd'
+lsyncd_excludes:
+  - { exclude_dir: 'cache/'}
+  - { exclude_dir: 'sessions/'}
+lsyncd_slaves:
+  - { remote_ip: '1.1.1.1' }
+  - { remote_ip: '2.2.2.2' }

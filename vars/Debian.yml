@@ -1,2 +1,3 @@
 ---
-lsyncd_conf_name: /etc/lsyncd/lsyncd.conf
+lsyncd_conf_name: /etc/lsyncd/lsyncd.conf.lua
+lsyncd_exclude_name: /etc/lsyncd/lsyncd.exclude
