@@ -8,12 +8,26 @@
 -- sync{default.rsyncssh, source="/var/www/html", host="localhost", targetdir="/tmp/htmlcopy/"}
 
 settings {
-    logfile = '/var/log/lsyncd/lsyncd.log',
-    statusFile = '/tmp/lsyncd.status'
+    logfile = '{{ lsyncd_log_path }}/lsyncd.log',
+    statusFile = '{{ lsyncd_log_path }}/lsyncd.status'
 }
 
+{% for slave in lsyncd_slaves %}
 sync {
-    default.rsync,
-    source = 'var/www/html',
-    target = '/tmp/test'
+    default.rsyncssh,
+    source = '{{ lsyncd_watch_dir }}',
+    host = '{{ slave.remote_ip }}',
+    targetdir = '{{ lsyncd_watch_dir }}',
+    {% if lsyncd_excludes is iterable %}
+    excludeFrom = '{{ lsyncd_exclude_name }}',
+    {% endif %}
+    rsync = {
+        archive = true,
+        compress = true,
+        acls = true,
+        verbose = true,
+        rsh = '/usr/bin/ssh -p 22 -o StrictHostKeyChecking=no'
+    }
 }
+
+{% endfor %}
