@@ -1,12 +1,3 @@
-----
--- User configuration file for lsyncd.
---
--- Simple example for default rsync, but executing moves through on the target.
---
--- For more examples, see /usr/share/doc/lsyncd*/examples/
---
--- sync{default.rsyncssh, source="/var/www/html", host="localhost", targetdir="/tmp/htmlcopy/"}
-
 settings {
     logfile = '{{ lsyncd_log_path }}/lsyncd.log',
     statusFile = '{{ lsyncd_log_path }}/lsyncd.status'
