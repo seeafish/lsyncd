@@ -37,6 +37,17 @@ Alternatively, the vars can be overridden in the playbook:
   - lsyncd
 ```
 
+### Modifying slaves and excludes
+By changing either ```lsyncd_slaves``` or ```lsyncd_excludes``` hashes (either in vars/main.yml
+or override fromm the playbook run itself), the master
+can be modified to add/remove slaves and/or excluded directories by running the playbook
+with tag 'reconfig':
+```bash
+ansible-playbook -i hosts playbook.yml --tags=reconfig
+```
+This will skip all the installation and checking sections, and simply rewrite the config
+with the values specified in your hash.
+
 ### Todo
 * SSH key to remote servers
 * Other OS support
