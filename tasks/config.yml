@@ -1,0 +1,9 @@
+---
+- name: Configure lsyncd
+  template: src=lsyncd.conf.j2 dest={{ lsyncd_conf_name }}
+  notify: Restart lsyncd
+
+- name: Create exclusions file
+  template: src=lsyncd.exclude.j2 dest={{ lsyncd_exclude_name }}
+  notify: Restart lsyncd
+  when: lsyncd_excludes is iterable

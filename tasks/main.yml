@@ -1,2 +1,9 @@
 ---
 - include: install.yml tags=install
+
+- include: config.yml tags=reconfig
+
+# Ensure lsyncd is up and running
+# Put this here to run regardless of what tags are called
+- name: Ensure lsyncd enabled
+  service: name=lsyncd enabled=yes
