@@ -8,3 +8,12 @@
 
 - name: Ensure log directory is present
   file: path={{ lsyncd_log_path }} mode=0755 owner=root group=root state=directory
+
+- name: Determine how many directories require watching
+  shell: /bin/find '{{ lsyncd_watch_dir }}' -type d | /usr/bin/wc -l | /bin/awk '{print $1*3}'
+  register: watches
+  ignore_errors: True
+
+- name: Change fs.inotify.max_user_watches
+  sysctl: name=fs.inotify.max_user_watches value={{ watches.stdout }} sysctl_set=yes reload=yes ignoreerrors=yes state=present
+  when: watches.stdout|int > 8192
